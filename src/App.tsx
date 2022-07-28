@@ -1,12 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
+import Login from "./pages/Auth";
 
 function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Landing />} />
-			<Route path="/route" element={<div>Route</div>} />
+			<Route path="/login" element={<Login />} />
 		</Routes>
 	);
 }

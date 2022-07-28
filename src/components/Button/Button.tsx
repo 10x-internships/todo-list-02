@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+interface Props {
+	width?: string;
+}
+const Button = styled.button<Props>`
 	display: inline-block;
 	padding: 0.625rem 1rem;
 	border-radius: 4px;
@@ -8,6 +11,7 @@ const Button = styled.button`
 	border: none;
 	outline: none;
 	color: white;
+	width: ${(props) => (props.width ? props.width : "auto")};
 	cursor: pointer;
 
 	&:hover {

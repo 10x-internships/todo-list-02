@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Favicon from "../Icons/Favicon";
 import MenuIcon from "../Icons/Menu";
+import A from "../Link";
 import User from "./User";
 
 const Wrapper = styled.div`
@@ -20,21 +22,26 @@ const List = styled.ul`
 const Item = styled.li`
 	margin-right: 1rem;
 `;
-const A = styled.a`
-	color: black;
-	text-decoration: none;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 150%;
-`;
 const MenuNav = styled.div`
 	display: none;
 	@media (max-width: 600px) {
 		display: block;
 	}
 `;
-const navItems = ["Home", "About", "Pricing"];
+const navItems = [
+	{
+		name: "Home",
+		href: "/",
+	},
+	{
+		name: "About",
+		href: "/about",
+	},
+	{
+		name: "Pricing",
+		href: "/price",
+	},
+];
 const Navbar = () => {
 	return (
 		<Wrapper>
@@ -45,11 +52,11 @@ const Navbar = () => {
 			<List>
 				{navItems.map((item, index) => (
 					<Item key={index}>
-						<A>{item}</A>
+						<A to={item.href}>{item.name}</A>
 					</Item>
 				))}
 			</List>
-			{true ? <A href="#">Login</A> : <User />}
+			{true ? <A to="/login">Login</A> : <User />}
 		</Wrapper>
 	);
 };

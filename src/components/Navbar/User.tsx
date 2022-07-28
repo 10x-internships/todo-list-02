@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import UserIcon from "../Icons/User";
-import { P } from "../Typography/Typography";
+import { P } from "../Typography";
 
 const Wrapper = styled.div`
 	display: flex;

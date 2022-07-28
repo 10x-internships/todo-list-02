@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { P } from "../Typography/Typography";
+import { P } from "../Typography";
 
 const Wrapper = styled.div`
 	text-align: center;

@@ -1,9 +1,8 @@
 {
-    "posts": [
-      { "id": 1, "title": "json-server", "author": "typicode" }
+    "tasks": [
+      { "id": 1, "title": "json-server", "content": "typicode", "timestamp": "2345", "owner": 1235 }
     ],
-    "comments": [
-      { "id": 1, "body": "some comment", "postId": 1 }
-    ],
-    "profile": { "name": "typicode" }
+    "users": [
+      { "uid": 1235, "username": "some comment", "password": "1324", "name": "Phucs" }
+    ]
   }

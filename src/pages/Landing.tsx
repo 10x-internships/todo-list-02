@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../components/Button/Button";
-import Navbar from "../components/Navbar/Nav";
-import { H1, P } from "../components/Typography/Typography";
+import { H1, P } from "../components/Typography";
 import image1 from "../assets/image1.jpg";
-import Footer from "../components/Footer/Footer";
+import MainLayout from "../components/Layout/MainLayout";
 
 const Body = styled.div`
 	text-align: center;
@@ -29,23 +28,21 @@ const Image = styled.img`
 `;
 const Landing = () => {
 	return (
-		<>
-			<Navbar />
+		<MainLayout>
 			<Body>
 				<Heading>
 					<H1>One Workspace. Everyteam</H1>
 				</Heading>
 				<Description>
 					<P>
-						We’re more than a doc. Or a table. Customize Notion to work the way
-						you do.
+						We&apos;re more than a doc. Or a table. Customize Notion to work the
+						way you do.
 					</P>
 				</Description>
 				<Image src={image1} />
 				<Button>Get Notion Free</Button>
 			</Body>
-			<Footer />
-		</>
+		</MainLayout>
 	);
 };
 
