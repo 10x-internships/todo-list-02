@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Favicon from "../Logo/Favicon";
-// import favicon from "../../assets/favicon.svg";
+import Favicon from "../Icons/Favicon";
+import MenuIcon from "../Icons/Menu";
+import User from "./User";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -12,6 +13,9 @@ const Wrapper = styled.div`
 const List = styled.ul`
 	display: flex;
 	list-style-type: none;
+	@media (max-width: 600px) {
+		display: none;
+	}
 `;
 const Item = styled.li`
 	margin-right: 1rem;
@@ -24,10 +28,19 @@ const A = styled.a`
 	font-size: 16px;
 	line-height: 150%;
 `;
+const MenuNav = styled.div`
+	display: none;
+	@media (max-width: 600px) {
+		display: block;
+	}
+`;
 const navItems = ["Home", "About", "Pricing"];
 const Navbar = () => {
 	return (
 		<Wrapper>
+			<MenuNav>
+				<MenuIcon />
+			</MenuNav>
 			<Favicon />
 			<List>
 				{navItems.map((item, index) => (
@@ -36,7 +49,7 @@ const Navbar = () => {
 					</Item>
 				))}
 			</List>
-			<A href="#">Login</A>
+			{true ? <A href="#">Login</A> : <User />}
 		</Wrapper>
 	);
 };
