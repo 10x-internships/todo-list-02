@@ -1,8 +1,21 @@
 {
-    "tasks": [
-      { "id": 1, "title": "json-server", "content": "typicode", "timestamp": "2345", "owner": 1235 }
-    ],
-    "users": [
-      { "uid": 1235, "username": "some comment", "password": "1324", "name": "Phucs" }
-    ]
-  }
+  "tasks": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "content": "typicode",
+      "timestamp": "2345",
+      "owner": 1235
+    }
+  ],
+  "users": [
+    {
+      "id": "admin",
+      "password": "123456"
+    },
+    {
+      "id": "admin1",
+      "password": "123456"
+    }
+  ]
+}

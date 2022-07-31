@@ -4,6 +4,7 @@ import Button from "../components/Button/Button";
 import MainLayout from "../components/Layout/MainLayout";
 import TextField from "../components/TextField";
 import { H1, P } from "../components/Typography";
+import { LoginService, RegisterService } from "../services/Auth";
 
 const Body = styled.div`
 	padding: 7rem 0;
@@ -40,7 +41,19 @@ const Auth = () => {
 			[e.target.id]: e.target.value,
 		});
 	};
-	const LoginHandler = () => {};
+	const LoginHandler = () => {
+		LoginService(authBody).then((data) => {
+			if (data.length !== 0) localStorage.setItem("user", data);
+			alert("Wrong username or password");
+		});
+	};
+	const RegisterHandler = () => {
+		RegisterService(authBody)
+			.then((data) => setIsLogin(true))
+			.catch(() => {
+				alert("Username already exists");
+			});
+	};
 	return (
 		<MainLayout>
 			<Body>
@@ -54,9 +67,10 @@ const Auth = () => {
 				<TextField
 					label={"Password"}
 					id={"password"}
+					onChange={onChange}
 					placeholder={"Enter password"}
 				/>
-				<Button width="100%">
+				<Button width="100%" onClick={isLogin ? LoginHandler : RegisterHandler}>
 					{isLogin ? auth.login.button : auth.register.button}
 				</Button>
 				<P onClick={handleSwitchAuth}>

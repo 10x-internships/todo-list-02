@@ -11,7 +11,7 @@ interface Props extends HTMLAttributes<HTMLInputElement> {
 	label: string;
 	id: string;
 }
-const TextField: FC<Props> = ({ label, id, ...props }) => {
+const TextField = ({ label, id, ...props }: Props) => {
 	return (
 		<Wrapper>
 			<Label htmlFor={id}>{label}</Label>

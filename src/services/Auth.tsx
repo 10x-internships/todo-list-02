@@ -15,13 +15,14 @@ const RegisterService = async (reqBody: IReqBody) => {
 		}),
 	};
 	const res = await fetch(
-		`${process.env.REACT_APP_LOCALHOST_URL}/tasks`,
+		`${process.env.REACT_APP_LOCALHOST_URL}/users`,
 		reqOptions
 	);
 	return res.json();
 };
 const LoginService = async (reqBody: IReqBody) => {
-	const url = `/users?id=${reqBody.username}&password=${reqBody.password}`;
+	const url = `${process.env.REACT_APP_LOCALHOST_URL}/users?uid=${reqBody.username}&password=${reqBody.password}`;
 	const res = await fetch(url);
 	return res.json();
 };
+export { LoginService, RegisterService };
