@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button/Button";
 import MainLayout from "../components/Layout/MainLayout";
 import TextField from "../components/TextField";
 import { H1, P } from "../components/Typography";
+import { useAppDispatch } from "../redux/hooks";
+import { loginSuccess } from "../redux/userSlice";
 import { LoginService, RegisterService } from "../services/Auth";
 
 const Body = styled.div`
@@ -30,6 +33,8 @@ const initAuthBody = {
 	password: "",
 };
 const Auth = () => {
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const [isLogin, setIsLogin] = useState(true);
 	const [authBody, setAuthBody] = useState(initAuthBody);
 	const handleSwitchAuth = () => {
@@ -43,7 +48,12 @@ const Auth = () => {
 	};
 	const LoginHandler = () => {
 		LoginService(authBody).then((data) => {
-			if (data.length !== 0) localStorage.setItem("user", data);
+			if (data.length !== 0) {
+				localStorage.setItem("user", JSON.stringify(data[0].id));
+				dispatch(loginSuccess(data[0].id));
+				navigate("/todo");
+				return;
+			}
 			alert("Wrong username or password");
 		});
 	};
