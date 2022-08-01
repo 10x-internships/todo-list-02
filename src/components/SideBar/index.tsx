@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { addTaskSuccess, selectTaskSuccess } from "../../redux/taskSlice";
+import { createTask } from "../../services/Task";
 import AddIcon from "../Icons/Add";
 import ClockIcon from "../Icons/Clock";
 import ImportIcon from "../Icons/Import";
@@ -30,15 +32,34 @@ const Body = styled.div`
 `;
 const Footer = styled.div`
 	display: flex;
+	margin-top: auto;
 	width: 100%;
 	height: 45px;
 `;
 const Tasks = styled.div`
 	padding-bottom: 1rem;
 `;
-
+interface ITask {
+	id?: number;
+	creator: string;
+	title: string;
+	content: string;
+}
 const SideBar = () => {
 	const user = useAppSelector((state) => state.user.username);
+	const tasks = useAppSelector((state) => state.task.tasks);
+	const dispatch = useAppDispatch();
+	const handleSelectTask = (task: ITask) => {
+		dispatch(selectTaskSuccess(task));
+	};
+	const handleCreateTask = () => {
+		const reqBody = {
+			creator: user,
+			title: "Untitled",
+			content: "",
+		};
+		createTask({ reqBody }).then((data) => dispatch(addTaskSuccess(data)));
+	};
 	return (
 		<Wrapper>
 			<Header>
@@ -51,8 +72,20 @@ const SideBar = () => {
 			</Feature>
 			<Body>
 				<Tasks>
-					<Tag icon={<PageIcon />} content="Untitled" />
-					<Tag icon={<AddIcon />} content="Add a page" />
+					{tasks.map((task) => (
+						<Tag
+							icon={<PageIcon />}
+							content="Untitled"
+							key={task.id}
+							isTask={true}
+							onClick={() => handleSelectTask(task)}
+						/>
+					))}
+					<Tag
+						icon={<AddIcon />}
+						content="Add a page"
+						onClick={handleCreateTask}
+					/>
 				</Tasks>
 				<Tag icon={<TemplatesIcon />} content="Templates" />
 				<Tag icon={<ImportIcon />} content="Import" />

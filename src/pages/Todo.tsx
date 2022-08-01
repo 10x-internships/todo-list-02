@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import SideBar from "../components/SideBar";
-import { useAppSelector } from "../redux/hooks";
-import { getDataFromLocalStorage } from "../services/LocalStorage";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { getAllTaskSuccess } from "../redux/taskSlice";
+import { getAllTasks } from "../services/Task";
 
 const Wrapper = styled.div`
 	height: 100vh;
@@ -10,12 +11,12 @@ const Wrapper = styled.div`
 
 const Todo = () => {
 	const user = useAppSelector((state) => state.user.username);
-	console.log("State user: ", user);
-
-	// let user = localStorage.getItem("user");
-	// if (user) {
-	// 	console.log("user: ", user);
-	// }
+	const dispatch = useAppDispatch();
+	useEffect(() => {
+		getAllTasks(user).then((data) => {
+			dispatch(getAllTaskSuccess(data));
+		});
+	}, []);
 
 	return (
 		<Wrapper>

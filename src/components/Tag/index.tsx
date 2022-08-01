@@ -1,12 +1,15 @@
-import React, { SVGProps } from "react";
+import React, { HTMLAttributes, SVGProps } from "react";
 import styled from "styled-components";
+import DeleteIcon from "../Icons/Delete";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
 	icon?: React.ReactNode;
+	isTask?: boolean;
 	content: string;
 }
 
 const Wrapper = styled.div`
+	position: relative;
 	display: flex;
 	align-items: center;
 	margin: 0px 3px;
@@ -28,12 +31,29 @@ const Icon = styled.div`
 const Content = styled.div`
 	color: rgba(25, 23, 17, 0.6);
 `;
+const Delete = styled.div`
+	display: none;
+	padding: 0.25rem;
+	border-radius: 50%;
+	position: absolute;
+	right: 0;
+	margin-right: 0.5rem;
+	cursor: pointer;
+	:hover {
+		background-color: #d1d1d1ef;
+	}
+`;
 
-const Tag = ({ icon, content }: Props) => {
+const Tag = ({ icon, content, isTask, ...props }: Props) => {
 	return (
-		<Wrapper>
+		<Wrapper {...props}>
 			<Icon>{icon}</Icon>
 			<Content>{content}</Content>
+			{isTask && (
+				<Delete>
+					<DeleteIcon />
+				</Delete>
+			)}
 		</Wrapper>
 	);
 };
