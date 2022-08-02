@@ -69,12 +69,14 @@ const Auth = () => {
 			<Body>
 				<H1>{isLogin ? auth.login.title : auth.register.title}</H1>
 				<TextField
+					lines={1}
 					label={"Username"}
 					id={"username"}
 					onChange={onChange}
 					placeholder={"Enter username"}
 				/>
 				<TextField
+					lines={1}
 					label={"Password"}
 					id={"password"}
 					onChange={onChange}

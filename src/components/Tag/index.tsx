@@ -1,9 +1,10 @@
-import React, { HTMLAttributes, SVGProps } from "react";
+import React, { HTMLAttributes } from "react";
 import styled from "styled-components";
 import DeleteIcon from "../Icons/Delete";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 	icon?: React.ReactNode;
+	rightIcon?: React.ReactNode;
 	isTask?: boolean;
 	content: string;
 }
@@ -31,8 +32,8 @@ const Icon = styled.div`
 const Content = styled.div`
 	color: rgba(25, 23, 17, 0.6);
 `;
-const Delete = styled.div`
-	display: none;
+const RightIcon = styled.div`
+	/* display: none; */
 	padding: 0.25rem;
 	border-radius: 50%;
 	position: absolute;
@@ -44,16 +45,12 @@ const Delete = styled.div`
 	}
 `;
 
-const Tag = ({ icon, content, isTask, ...props }: Props) => {
+const Tag = ({ icon, content, isTask, rightIcon, ...props }: Props) => {
 	return (
 		<Wrapper {...props}>
 			<Icon>{icon}</Icon>
 			<Content>{content}</Content>
-			{isTask && (
-				<Delete>
-					<DeleteIcon />
-				</Delete>
-			)}
+			{rightIcon && <RightIcon>{rightIcon}</RightIcon>}
 		</Wrapper>
 	);
 };

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface ITask {
-	id?: number;
+	id: number;
 	creator: string;
 	title: string;
 	content: string;
@@ -30,10 +30,23 @@ export const taskSlice = createSlice({
 		addTaskSuccess: (state, action: PayloadAction<ITask>) => {
 			state.tasks.push(action.payload);
 		},
+		updateTaskInArray: (state, action: PayloadAction<ITask>) => {
+			const currentTaskIndex = state.tasks.findIndex(
+				(task) => task.id === action.payload.id
+			);
+			if (currentTaskIndex) {
+				state.tasks[currentTaskIndex] = action.payload;
+			}
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { getAllTaskSuccess, addTaskSuccess, selectTaskSuccess } = taskSlice.actions;
+export const {
+	getAllTaskSuccess,
+	addTaskSuccess,
+	selectTaskSuccess,
+	updateTaskInArray,
+} = taskSlice.actions;
 
 export default taskSlice.reducer;

@@ -1,20 +1,16 @@
 interface IReqBody {
-	// id?: number;
-	creator: string;
+	creator?: string;
 	title: string;
 	content: string;
 }
-interface Props {
-	reqBody: IReqBody;
-}
-const createTask = async (reqBody: Props) => {
+const createTask = async (reqBody: IReqBody) => {
 	const requestOptions = {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-			...reqBody.reqBody,
+			...reqBody,
 		}),
 	};
 	const res = await fetch(
@@ -23,7 +19,7 @@ const createTask = async (reqBody: Props) => {
 	);
 	return await res.json();
 };
-const updateTask = async (reqBody: Props, taskId: string) => {
+const updateTask = async (reqBody: IReqBody, taskId: number) => {
 	const requestOptions = {
 		method: "PUT",
 		headers: {

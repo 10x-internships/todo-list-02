@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addTaskSuccess, selectTaskSuccess } from "../../redux/taskSlice";
 import { createTask } from "../../services/Task";
 import AddIcon from "../Icons/Add";
 import ClockIcon from "../Icons/Clock";
+import DeleteIcon from "../Icons/Delete";
 import ImportIcon from "../Icons/Import";
+import LogoutIcon from "../Icons/Logout";
 import PageIcon from "../Icons/Page";
 import SearchIcon from "../Icons/Search";
 import SettingIcon from "../Icons/Setting";
@@ -16,7 +18,7 @@ import Tag from "../Tag";
 
 const Wrapper = styled.div`
 	position: relative;
-	max-width: 15rem;
+	width: 15rem;
 	height: 100%;
 	background-color: rgb(251, 251, 250);
 `;
@@ -40,7 +42,7 @@ const Tasks = styled.div`
 	padding-bottom: 1rem;
 `;
 interface ITask {
-	id?: number;
+	id: number;
 	creator: string;
 	title: string;
 	content: string;
@@ -58,12 +60,16 @@ const SideBar = () => {
 			title: "Untitled",
 			content: "",
 		};
-		createTask({ reqBody }).then((data) => dispatch(addTaskSuccess(data)));
+		createTask(reqBody).then((data) => dispatch(addTaskSuccess(data)));
 	};
 	return (
 		<Wrapper>
 			<Header>
-				<Tag icon={<UserIcon />} content={`${user}`} />
+				<Tag
+					icon={<UserIcon />}
+					content={`${user}`}
+					rightIcon={<LogoutIcon />}
+				/>
 			</Header>
 			<Feature>
 				<Tag icon={<SearchIcon />} content="Quick Find" />
@@ -75,9 +81,10 @@ const SideBar = () => {
 					{tasks.map((task) => (
 						<Tag
 							icon={<PageIcon />}
-							content="Untitled"
+							content={task.title}
 							key={task.id}
 							isTask={true}
+							rightIcon={<DeleteIcon />}
 							onClick={() => handleSelectTask(task)}
 						/>
 					))}
