@@ -19,10 +19,13 @@ export const userSlice = createSlice({
 		loginSuccess: (state, action: PayloadAction<string>) => {
 			state.username = action.payload;
 		},
+		logoutSuccess: (state) => {
+			state.username = "";
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { loginSuccess, hydrate } = userSlice.actions;
+export const { loginSuccess, logoutSuccess, hydrate } = userSlice.actions;
 
 export default userSlice.reducer;

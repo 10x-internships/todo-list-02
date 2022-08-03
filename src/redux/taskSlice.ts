@@ -30,6 +30,9 @@ export const taskSlice = createSlice({
 		addTaskSuccess: (state, action: PayloadAction<ITask>) => {
 			state.tasks.push(action.payload);
 		},
+		deleteTaskSuccess: (state, action: PayloadAction<number>) => {
+			state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+		},
 		updateTaskInArray: (state, action: PayloadAction<ITask>) => {
 			const currentTaskIndex = state.tasks.findIndex(
 				(task) => task.id === action.payload.id
@@ -46,6 +49,7 @@ export const {
 	getAllTaskSuccess,
 	addTaskSuccess,
 	selectTaskSuccess,
+	deleteTaskSuccess,
 	updateTaskInArray,
 } = taskSlice.actions;
 
