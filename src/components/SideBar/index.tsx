@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { addTaskSuccess, selectTaskSuccess } from "../../redux/taskSlice";
-import { createTask } from "../../services/Task";
+import {
+	addTaskSuccess,
+	deleteTaskSuccess,
+	selectTaskSuccess,
+} from "../../redux/taskSlice";
+import { logoutSuccess } from "../../redux/userSlice";
+import { createTask, deleteTask } from "../../services/Task";
 import AddIcon from "../Icons/Add";
 import ClockIcon from "../Icons/Clock";
 import DeleteIcon from "../Icons/Delete";
@@ -51,6 +56,7 @@ const SideBar = () => {
 	const user = useAppSelector((state) => state.user.username);
 	const tasks = useAppSelector((state) => state.task.tasks);
 	const dispatch = useAppDispatch();
+
 	const handleSelectTask = (task: ITask) => {
 		dispatch(selectTaskSuccess(task));
 	};
@@ -62,13 +68,23 @@ const SideBar = () => {
 		};
 		createTask(reqBody).then((data) => dispatch(addTaskSuccess(data)));
 	};
+	const handleDeleteTask = (taskId: number) => {
+		deleteTask(taskId);
+		dispatch(deleteTaskSuccess(taskId));
+	};
+	const logout = () => {
+		localStorage.removeItem("user");
+		dispatch(logoutSuccess());
+	};
 	return (
 		<Wrapper>
+			<button onClick={() => handleDeleteTask(11)}>DELETE</button>
 			<Header>
 				<Tag
 					icon={<UserIcon />}
 					content={`${user}`}
 					rightIcon={<LogoutIcon />}
+					rightFunc={logout}
 				/>
 			</Header>
 			<Feature>
@@ -86,6 +102,7 @@ const SideBar = () => {
 							isTask={true}
 							rightIcon={<DeleteIcon />}
 							onClick={() => handleSelectTask(task)}
+							rightFunc={() => handleDeleteTask(task.id)}
 						/>
 					))}
 					<Tag

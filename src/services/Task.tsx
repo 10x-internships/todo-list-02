@@ -35,7 +35,7 @@ const updateTask = async (reqBody: IReqBody, taskId: number) => {
 	);
 	return await res.json();
 };
-const deleteTask = async (taskId: string) => {
+const deleteTask = async (taskId: number) => {
 	const requestOptions = {
 		method: "DELETE",
 	};
