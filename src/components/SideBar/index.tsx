@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-	addTaskSuccess,
-	deleteTaskSuccess,
+	createTaskThunk,
+	deleteTaskThunk,
 	selectTaskSuccess,
 } from "../../redux/taskSlice";
 import { logoutSuccess } from "../../redux/userSlice";
-import { createTask, deleteTask } from "../../services/Task";
 import AddIcon from "../Icons/Add";
 import ClockIcon from "../Icons/Clock";
 import DeleteIcon from "../Icons/Delete";
@@ -66,11 +65,11 @@ const SideBar = () => {
 			title: "Untitled",
 			content: "",
 		};
-		createTask(reqBody).then((data) => dispatch(addTaskSuccess(data)));
+		// createTask(reqBody).then((data) => dispatch(addTaskSuccess(data)));
+		dispatch(createTaskThunk(reqBody));
 	};
 	const handleDeleteTask = (taskId: number) => {
-		deleteTask(taskId);
-		dispatch(deleteTaskSuccess(taskId));
+		dispatch(deleteTaskThunk(taskId));
 	};
 	const logout = () => {
 		localStorage.removeItem("user");
@@ -78,7 +77,7 @@ const SideBar = () => {
 	};
 	return (
 		<Wrapper>
-			<button onClick={() => handleDeleteTask(11)}>DELETE</button>
+			<button onClick={() => handleDeleteTask(9)}>DELETE</button>
 			<Header>
 				<Tag
 					icon={<UserIcon />}
