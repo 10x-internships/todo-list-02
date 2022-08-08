@@ -77,7 +77,6 @@ const SideBar = () => {
 	};
 	return (
 		<Wrapper>
-			<button onClick={() => handleDeleteTask(9)}>DELETE</button>
 			<Header>
 				<Tag
 					icon={<UserIcon />}

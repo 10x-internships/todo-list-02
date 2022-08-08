@@ -34,7 +34,6 @@ const Details = () => {
 	const processChange = debounce(() => {
 		const reqBody = { ...task, ...currentTask };
 		updateTask(reqBody, task!.id).then((data) => {
-			dispatch(selectTaskSuccess(data));
 			dispatch(updateTaskInArray(data));
 		});
 	});

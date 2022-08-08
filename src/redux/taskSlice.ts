@@ -63,12 +63,12 @@ export const taskSlice = createSlice({
 			state.tasks = state.tasks.filter((task) => task.id !== action.payload);
 		},
 		updateTaskInArray: (state, action: PayloadAction<ITask>) => {
-			state.tasks.map((task) => {
-				if (task.id === action.payload.id) {
-					task = action.payload;
-				}
-				return task;
-			});
+			const task = state.tasks.find((task) => task.id === action.payload.id);
+
+			if (task) {
+				task.title = action.payload.title;
+				task.content = action.payload.content;
+			}
 		},
 	},
 });
